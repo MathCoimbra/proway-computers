@@ -1,0 +1,20 @@
+<section class="product-list">
+  <!-- ngFor para percorrer a lista de products.ts -->
+  <div class="product-list__card" *ngFor="let product of products">
+    <!-- routerLink para que ao clicar no card seja direcionado para a tela de detalhes do produto-->
+    <a routerLink="/products/{{product.id}}" class="product-list__link">
+      <img [src]="product.imagem" />
+      <h2 class="product-item__name">
+        {{ product.descricao }}
+      </h2>
+      <p class="product-item__price">
+        <!-- pipe currency para formatar o valor do preço de acordo com o local -->
+        {{ product.preco | currency: 'BRL' }}
+      </p>
+      <p class="product-item__price-description">
+        {{ product.descricaoPreco }}
+      </p>
+      <button class="product-item__buy-button" type="button">Comprar</button>
+    </a>
+  </div>
+</section>
