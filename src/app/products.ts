@@ -7,6 +7,8 @@ export interface IProduct {
   imagem: string;
 }
 
+/* interface dos produtos no carrinho, adicionando somente a quantidade de itens no carrinho para a contagem: */
+
 export interface IProductCart extends IProduct {
   quantidade: number;
 }

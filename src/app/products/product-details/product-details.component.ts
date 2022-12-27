@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NotificationService } from 'src/app/notification.service';
-import { IProduct } from 'src/app/products';
-import { ProductService } from 'src/app/products.service';
+import { IProduct, IProductCart } from 'src/app/products';
+import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import { ProductService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +21,9 @@ export class ProductDetailsComponent implements OnInit {
     /* Classe que será utilizada para pegar o parâmetro da URL */
     private route: ActivatedRoute,
     /* Serviço para mostrar a notificação de adição ao carrinho */
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    /* Serviço de adicionar os itens ao carrinho */
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +35,22 @@ export class ProductDetailsComponent implements OnInit {
     this.product = this.productService.getOne(productId);
   }
 
-  addToCart() {
+  addToCartAlert() {
     /* chamando a função do serviço de notificação para mostrar o alerta em tela com a frase abaixo*/
     this.notificationService.notificate('Produto adicionado ao carrinho!');
+  }
+
+  addItemsToCart() {
+    this.addToCartAlert();
+
+    const product: IProductCart = {
+      /* ... - informa que todas as propriedades desse objeto são desse produto definido nessa classe na linha 15  */
+      /* ! - informa que são dados não undefined */
+      ...this.product!,
+      quantidade: this.quantity
+    };
+    /* adicionando os itens do produto de fato ao carrinho pela classe de serviço */
+    this.cartService.addToCart(product);
   }
 
 }
