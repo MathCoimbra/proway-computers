@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     /* especificando qual parâmetro será recuperado (id - conforme definido em products-routing-module) e adicionando na variável adequada */
     const productId = Number(routeParams.get("id"));
-    /*  */
+      
     this.product = this.productService.getOne(productId);
   }
 

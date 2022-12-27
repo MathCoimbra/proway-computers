@@ -13,7 +13,8 @@ export class CartService {
   /* método para pegar os dados do carrinho através da localStorage, criado para adicionar a contagem de itens no header */
   getCart() {
     /* JSON parse - converter de string para objeto */
-    return JSON.parse(localStorage.getItem('cart') || '');
+    this.items = JSON.parse(localStorage.getItem('cart') || '[]');
+    return this.items;
   }
 
   addToCart(product: IProductCart) {
@@ -21,12 +22,22 @@ export class CartService {
     this.items.push(product);
     /* JSON stringify - converter de objeto para string */
     /* abaixo está sendo armazenado os dados do produto na localStorage */
-    localStorage.setItem('cart', JSON.stringify(this.items));
+    this.addToLocalStorage();
+  }
+
+  /* método para excluir um produto do carrinho através do ID */
+  clearItemCart(productId: number) {
+    this.items = this.items.filter(item => item.id !== productId);
+    this.addToLocalStorage();
   }
 
   clearCart() {
     this.items = [];
     localStorage.clear();
+  }
+
+  addToLocalStorage() {
+    return localStorage.setItem('cart', JSON.stringify(this.items));
   }
 
 }
