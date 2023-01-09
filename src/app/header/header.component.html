@@ -7,16 +7,16 @@
     <nav class="main-header__menu">
       <ul>
         <li>
-          <a>Produtos</a>
+          <a routerLink="products">Produtos</a>
         </li>
         <li>
           <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-          <a>Carrinho</a>
+          <a routerLink="cart">Carrinho</a>
           <!-- método que retorna um vetor dos dados no carrinho, abaixo retorna o tamanho desse vetor para que seja feita a contagem -->
           <span class="badge-carrinho">{{ cartService.getCart().length }}</span>
         </li>
         <li>
-          <a>Contato </a>
+          <a routerLink="contact">Contato </a>
         </li>
         <li>
           <a><i class="fa-brands fa-facebook"></i></a>
@@ -32,9 +32,6 @@
         </li>
       </ul>
     </nav>
-    <form class="search-form">
-      <input type="text" />
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
-    </form>
+    <app-search-bar></app-search-bar>
   </div>
 </header>
